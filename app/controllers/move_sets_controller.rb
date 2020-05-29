@@ -1,0 +1,2 @@
+class MoveSetsController < ApplicationController
+end

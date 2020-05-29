@@ -1,0 +1,2 @@
+module PokeOnTeamsHelper
+end

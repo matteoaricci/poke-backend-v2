@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Poke On Teams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @poke_on_teams.each do |poke_on_team| %>
+      <tr>
+        <td><%= link_to 'Show', poke_on_team %></td>
+        <td><%= link_to 'Edit', edit_poke_on_team_path(poke_on_team) %></td>
+        <td><%= link_to 'Destroy', poke_on_team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Poke On Team', new_poke_on_team_path %>

@@ -1,0 +1,17 @@
+<%= form_with(model: poke_team_move, local: true) do |form| %>
+  <% if poke_team_move.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(poke_team_move.errors.count, "error") %> prohibited this poke_team_move from being saved:</h2>
+
+      <ul>
+        <% poke_team_move.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
