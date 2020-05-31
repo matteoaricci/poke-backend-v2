@@ -7,6 +7,13 @@ class UserteamsController < ApplicationController
     @userteams = Userteam.all
   end
 
+  def get_users_teams
+    current_user = User.find(params[:id])
+    teams = user.userteams 
+
+    render json: teams
+  end
+
   # GET /userteams/1
   # GET /userteams/1.json
   def show
