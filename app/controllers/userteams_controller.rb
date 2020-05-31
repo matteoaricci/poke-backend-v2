@@ -9,7 +9,7 @@ class UserteamsController < ApplicationController
 
   def get_users_teams
     current_user = User.find(params[:id])
-    teams = user.userteams 
+    teams = current_user.userteams 
 
     render json: teams
   end
@@ -31,17 +31,9 @@ class UserteamsController < ApplicationController
   # POST /userteams
   # POST /userteams.json
   def create
-    @userteam = Userteam.new(userteam_params)
+    userteam = Userteam.create(userteam_params)
 
-    respond_to do |format|
-      if @userteam.save
-        format.html { redirect_to @userteam, notice: 'Userteam was successfully created.' }
-        format.json { render :show, status: :created, location: @userteam }
-      else
-        format.html { render :new }
-        format.json { render json: @userteam.errors, status: :unprocessable_entity }
-      end
-    end
+    render json: userteam
   end
 
   # PATCH/PUT /userteams/1
@@ -61,11 +53,10 @@ class UserteamsController < ApplicationController
   # DELETE /userteams/1
   # DELETE /userteams/1.json
   def destroy
+    teamId = params[:id]
     @userteam.destroy
-    respond_to do |format|
-      format.html { redirect_to userteams_url, notice: 'Userteam was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    
+    render json: {status: "Team: #{teamId} was successfully destroyed", id: teamId}
   end
 
   private
@@ -76,6 +67,6 @@ class UserteamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def userteam_params
-      params.fetch(:userteam, {})
+      params.require(:userteam).permit(:user_id)
     end
 end
