@@ -14,6 +14,12 @@ class UserteamsController < ApplicationController
     render json: teams
   end
 
+  def get_pokemon_on_team
+    current_team = PokeOnTeam.where(user_team_id: params[:id])
+    byebug;
+    render json: current_team
+  end
+
   # GET /userteams/1
   # GET /userteams/1.json
   def show

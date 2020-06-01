@@ -24,17 +24,9 @@ class PokeOnTeamsController < ApplicationController
   # POST /poke_on_teams
   # POST /poke_on_teams.json
   def create
-    @poke_on_team = PokeOnTeam.new(poke_on_team_params)
+    poke_on_team = PokeOnTeam.create(poke_on_team_params)
 
-    respond_to do |format|
-      if @poke_on_team.save
-        format.html { redirect_to @poke_on_team, notice: 'Poke on team was successfully created.' }
-        format.json { render :show, status: :created, location: @poke_on_team }
-      else
-        format.html { render :new }
-        format.json { render json: @poke_on_team.errors, status: :unprocessable_entity }
-      end
-    end
+    render json: poke_on_team
   end
 
   # PATCH/PUT /poke_on_teams/1
@@ -69,6 +61,6 @@ class PokeOnTeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def poke_on_team_params
-      params.fetch(:poke_on_team, {})
+      params.require(:poke_on_team).permit(:pokemon_id, :nickname, :user_team_id, :hp_ev, :attack_ev, :defense_ev, :spattack_ev, :spdefense_ev, :speed_ev, :hp_iv, :attack_iv, :defense_iv, :spattack_iv, :spdefense_iv, :speed_iv)
     end
 end
