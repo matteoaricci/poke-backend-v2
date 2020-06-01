@@ -4,7 +4,13 @@ class PokeOnTeamsController < ApplicationController
   # GET /poke_on_teams
   # GET /poke_on_teams.json
   def index
-    @poke_on_teams = PokeOnTeam.all
+    poke_on_teams = PokeOnTeam.all
+    render json: poke_on_teams
+  end
+
+  def get_pokemon_on_team
+    current_team = PokeOnTeam.where(user_team_id: params[:id])
+    render json: current_team
   end
 
   # GET /poke_on_teams/1
@@ -24,9 +30,8 @@ class PokeOnTeamsController < ApplicationController
   # POST /poke_on_teams
   # POST /poke_on_teams.json
   def create
-    poke_on_team = PokeOnTeam.create(poke_on_team_params)
-
-    render json: poke_on_team
+    new_poke = PokeOnTeam.create(poke_on_team_params)
+    render json: new_poke
   end
 
   # PATCH/PUT /poke_on_teams/1

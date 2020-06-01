@@ -4,7 +4,8 @@ class UserteamsController < ApplicationController
   # GET /userteams
   # GET /userteams.json
   def index
-    @userteams = Userteam.all
+    userteams = Userteam.all
+    render json: userteams
   end
 
   def get_users_teams
@@ -12,12 +13,6 @@ class UserteamsController < ApplicationController
     teams = current_user.userteams 
 
     render json: teams
-  end
-
-  def get_pokemon_on_team
-    current_team = PokeOnTeam.where(user_team_id: params[:id])
-    byebug;
-    render json: current_team
   end
 
   # GET /userteams/1

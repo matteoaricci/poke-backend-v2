@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   resources :users
 
   get '/loadteams/:id', to: 'userteams#get_users_teams'
-  get '/pokeonteam/:id', to: 'userteams#get_pokemon_on_team'
+  get '/loadpoketeams/:id', to: 'poke_on_teams#get_pokemon_on_team'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
