@@ -51,11 +51,9 @@ class PokeOnTeamsController < ApplicationController
   # DELETE /poke_on_teams/1
   # DELETE /poke_on_teams/1.json
   def destroy
-    @poke_on_team.destroy
-    respond_to do |format|
-      format.html { redirect_to poke_on_teams_url, notice: 'Poke on team was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    deleted_poke = @poke_on_team.destroy
+    
+    render json: deleted_poke
   end
 
   private
