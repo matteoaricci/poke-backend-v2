@@ -37,15 +37,10 @@ class PokeOnTeamsController < ApplicationController
   # PATCH/PUT /poke_on_teams/1
   # PATCH/PUT /poke_on_teams/1.json
   def update
-    respond_to do |format|
-      if @poke_on_team.update(poke_on_team_params)
-        format.html { redirect_to @poke_on_team, notice: 'Poke on team was successfully updated.' }
-        format.json { render :show, status: :ok, location: @poke_on_team }
-      else
-        format.html { render :edit }
-        format.json { render json: @poke_on_team.errors, status: :unprocessable_entity }
-      end
-    end
+   current_poke = PokeOnTeam.find(params[:id])
+   current_poke.update(poke_on_team_params)
+
+   render json: current_poke
   end
 
   # DELETE /poke_on_teams/1
