@@ -10,6 +10,8 @@ class PokeOnTeamsController < ApplicationController
 
   def get_pokemon_on_team
     current_team = PokeOnTeam.where(user_team_id: params[:id])
+    # move_sets = current_team.map {|poke| poke.pokemon.move_sets }
+    # puts move_sets
     render json: current_team
   end
 
