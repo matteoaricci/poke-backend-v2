@@ -48,8 +48,9 @@ class PokeOnTeamsController < ApplicationController
    current_poke = PokeOnTeam.find(params[:id])
    current_poke.update(poke_on_team_params)
 
+   if current_poke.pokemon_id
    move_set = Pokemon.find(current_poke.pokemon_id)
-
+   end
    render json: {current_poke: current_poke, move_set: move_set}
   end
 
