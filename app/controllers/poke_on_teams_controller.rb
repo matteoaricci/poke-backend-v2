@@ -12,7 +12,13 @@ class PokeOnTeamsController < ApplicationController
     current_team = PokeOnTeam.where(user_team_id: params[:id])
     # move_sets = current_team.map {|poke| poke.pokemon.move_sets }
     # puts move_sets
-    render json: current_team
+    move_sets = current_team.map {|poke| if poke.pokemon_id
+      Pokemon.find(poke.pokemon_id).move_sets
+    end}
+
+    pokemon_moves = current_team.map {|poke| poke.poke_team_moves}
+
+    render json: {current_team: current_team, move_sets: move_sets, pokemon_moves: pokemon_moves}
   end
 
   # GET /poke_on_teams/1
@@ -42,7 +48,9 @@ class PokeOnTeamsController < ApplicationController
    current_poke = PokeOnTeam.find(params[:id])
    current_poke.update(poke_on_team_params)
 
-   render json: current_poke
+   move_set = Pokemon.find(current_poke.pokemon_id)
+
+   render json: {current_poke: current_poke, move_set: move_set}
   end
 
   # DELETE /poke_on_teams/1
